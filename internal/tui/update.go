@@ -24,6 +24,10 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.restartTest()
 				return m, tickCmd()
 			}
+			// Handle Enter for line progression
+			if m.game.HandleEnterKey() {
+				return m, nil
+			}
 			return m, nil
 
 		case " ":
