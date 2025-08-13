@@ -149,6 +149,27 @@ func (g *TypingGame) AddCharacter(char rune) {
 	}
 }
 
+// HandleEnterKey handles Enter key press for line progression
+func (g *TypingGame) HandleEnterKey() bool {
+	if g.IsFinished || g.IsTimeUp() {
+		return false
+	}
+
+	lineText := []rune(g.DisplayLines[0])
+
+	// Only allow Enter to progress if at end of line
+	if g.CurrentPos == len(lineText) {
+		// Treat Enter like Space internally for consistency
+		g.UserInput += " "
+		g.CurrentPos++
+		g.GlobalPos++
+		g.shiftLines()
+		return true
+	}
+
+	return false
+}
+
 // shiftLines moves to the next line in the game, updating the words typed and generating new lines
 func (g *TypingGame) shiftLines() {
 	// Move to next line
