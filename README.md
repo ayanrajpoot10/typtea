@@ -1,10 +1,21 @@
 <h1 align="center">typtea</h1>
 
-<p align="center">Minimal terminal-based typing speed test with support for dozens of programming languages</p>
+<p align="center">Minimal terminal-based typing speed tester with support for dozens of programming languages</p>
 
 <div align="center">
 <img src="assets/example.gif" />
 </div>
+
+<br>
+
+<p align="center">
+  <i>Featured on</i>
+</p>
+<p align="center">
+  <a href="https://terminaltrove.com/typtea/">
+    <img width="25%" alt="Terminal Trove logo" src="https://github.com/user-attachments/assets/f85b1470-a574-4bc2-b002-4e6dddb9e277" />
+  </a>
+</p>
 
 ---
 
