@@ -19,7 +19,20 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "ctrl+c", "esc":
 			return m, tea.Quit
 
+		case "tab":
+			// Track Tab key press
+			m.tabPressed = true
+			return m, nil
+
 		case "enter":
+			// Check for Tab+Enter combination to restart during test
+			if m.tabPressed && !m.showResults && m.game.IsStarted {
+				m.restartTest()
+				return m, tickCmd()
+			}
+			// Reset Tab state after Enter
+			m.tabPressed = false
+
 			if m.showResults {
 				m.restartTest()
 				return m, tickCmd()
@@ -31,18 +44,24 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, nil
 
 		case " ":
+			// Reset Tab state on any other key
+			m.tabPressed = false
 			if !m.showResults && !m.game.IsFinished && !m.game.IsTimeUp() {
 				m.game.AddCharacter(' ')
 			}
 			return m, nil
 
 		case "backspace":
+			// Reset Tab state on any other key
+			m.tabPressed = false
 			if !m.showResults && !m.game.IsFinished {
 				m.game.RemoveCharacter()
 			}
 			return m, nil
 
 		default:
+			// Reset Tab state on any other key
+			m.tabPressed = false
 			// Handle regular character input
 			if !m.showResults && !m.game.IsFinished && !m.game.IsTimeUp() {
 				runes := []rune(msg.String())

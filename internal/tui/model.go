@@ -18,6 +18,7 @@ type Model struct {
 	finalStats  game.TypingStats
 	duration    int
 	language    string
+	tabPressed  bool
 }
 
 // tickMsg is a message type used to handle periodic updates in the application
@@ -41,6 +42,7 @@ func (m *Model) restartTest() {
 	m.game = game.NewTypingGame(m.duration)
 	m.showResults = false
 	m.finalStats = game.TypingStats{}
+	m.tabPressed = false
 }
 
 // Init initializes the model and starts the tick command for periodic updates
